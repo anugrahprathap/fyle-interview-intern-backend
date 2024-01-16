@@ -1,56 +1,80 @@
-# Fyle Backend Challenge
+## Challange Submission
 
-## Who is this for?
+### Project Overview
 
-This challenge is meant for candidates who wish to intern at Fyle and work with our engineering team. You should be able to commit to at least 6 months of dedicated time for internship.
+This project is a Flask application that manages assignments for students, teachers, and principals. There are five main resources: Users, Principal, Students, Teachers, and Assignments. The application already has users set up (1 Principal, 2 students, and 2 teachers).
 
-## Why work at Fyle?
+### Completed Tasks
 
-Fyle is a fast-growing Expense Management SaaS product. We are ~40 strong engineering team at the moment. 
+1. **Implemented Missing APIs:**
+   - **GET /principal/assignments:** Lists all submitted and graded assignments for the principal.
+   - **GET /principal/teachers:** Lists all teachers for the principal.
+   - **POST /principal/assignments/grade:** Allows the principal to grade or re-grade an assignment.
 
-We are an extremely transparent organization. Check out our [careers page](https://careers.fylehq.com) that will give you a glimpse of what it is like to work at Fyle. Also, check out our Glassdoor reviews [here](https://www.glassdoor.co.in/Reviews/Fyle-Reviews-E1723235.htm). You can read stories from our teammates [here](https://stories.fylehq.com).
+2. **Additional Tests:**
+   - Added tests for the grading API.
+   - Addressed intentional bugs in the application to ensure all tests pass.
 
+3. **SQL Queries:**
+   - Implemented SQL queries :
+     - `count_grade_A_assignments_by_teacher_with_max_grading.sql`
+     - `number_of_assignments_per_state.sql`
 
-## Challenge outline
+4. **Dockerized the Application:**
+   - Created a Dockerfile and a docker-compose.yml file to containerize the application.
 
-This challenge involves writing a backend service for a classroom. The challenge is described in detail [here](./Application.md)
+5. **Test Coverage:**
+   - Ensured that all tests pass.
+   - Achieved test coverage of 94% .
+   ![Alt text](screenshots/test-coverage.png?raw=true "Optional Title")
 
+### Docker Instructions
 
-## What happens next?
+#### Build the Docker Image
 
-You will hear back within 48 hours from us via email. 
-
-
-## Installation
-
-1. Fork this repository to your github account
-2. Clone the forked repository and proceed with steps mentioned below
-
-### Install requirements
-
+```bash
+docker build -t flask-assignment-app .
 ```
-virtualenv env --python=python3.8
-source env/bin/activate
-pip install -r requirements.txt
-```
-### Reset DB
 
-```
-export FLASK_APP=core/server.py
-rm core/store.sqlite3
-flask db upgrade -d core/migrations/
-```
-### Start Server
+#### Run the Application with Docker Compose
 
+```bash
+docker-compose up
 ```
-bash run.sh
-```
-### Run Tests
 
-```
-pytest -vvv -s tests/
+### Accessing APIs
 
-# for test coverage report
-# pytest --cov
-# open htmlcov/index.html
-```
+#### Auth Headers
+
+- **Header:** X-Principal
+- **Value:** {"user_id": 1, "student_id": 1}
+
+#### Sample APIs
+
+1. **GET /student/assignments:**
+   - Lists all assignments created by a student.
+
+2. **POST /student/assignments:**
+   - Creates an assignment.
+
+3. **POST /student/assignments:**
+   - Edits an assignment.
+
+4. **POST /student/assignments/submit:**
+   - Submits an assignment.
+
+5. **GET /teacher/assignments:**
+   - Lists all assignments submitted to this teacher.
+
+6. **POST /teacher/assignments/grade:**
+   - Grades an assignment.
+
+7. **GET /principal/assignments:**
+   - Lists all submitted and graded assignments for the principal.
+
+8. **GET /principal/teachers:**
+   - Lists all teachers for the principal.
+
+9. **POST /principal/assignments/grade:**
+   - Grades or re-grades an assignment.
+

@@ -1,6 +1,6 @@
 from core import db
 from core.libs import helpers
-
+# from core.models.users import User
 
 class Teacher(db.Model):
     __tablename__ = 'teachers'
@@ -11,3 +11,29 @@ class Teacher(db.Model):
 
     def __repr__(self):
         return '<Teacher %r>' % self.id
+    @classmethod
+    def get_all_teachers_principal(cls):
+        # Join the Teacher and User tables on user_id
+        # query = db.session.query(cls).all()
+        # query = (
+        #     db.session.query(cls, User.username, User.email)
+        #     .join(User, cls.user_id == User.id)
+        #     .all()
+        # )
+        # teachers_data = [
+        #     {
+        #         'id': teacher.id,
+        #         'user_id': teacher.user_id,
+        #         'created_at': teacher.created_at,
+        #         'updated_at': teacher.updated_at,
+        #         'username': username,
+        #         'email': email
+        #     }
+        #     for teacher, username, email in query
+        # ]
+
+        return cls.query.all()
+
+     
+        
+

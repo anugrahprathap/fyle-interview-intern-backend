@@ -60,3 +60,40 @@ def test_regrade_assignment(client, h_principal):
 
     assert response.json['data']['state'] == AssignmentStateEnum.GRADED.value
     assert response.json['data']['grade'] == GradeEnum.B
+
+
+def test_list_all_teachers(client, h_principal):
+    response = client.get(
+        '/principal/teachers',
+        headers=h_principal
+    )
+
+    assert response.status_code == 200
+
+    data = response.json['data']
+    # For example, you might want to check if each teacher has an 'id', 'user_id', 'created_at', 'updated_at', etc.
+    for teacher in data:
+        assert 'id' in teacher
+        assert 'user_id' in teacher
+        assert 'created_at' in teacher
+        assert 'updated_at' in teacher
+
+
+
+def test_grade_assignment_bad_grade_2(client, h_principal):
+    """
+    failure case: API should allow only grades available in enum
+    """
+    response = client.post(
+        '/principal/assignments/grade',
+        headers=h_principal,
+        json={
+            "id": 1,
+            "grade": "AB"
+        }
+    )
+
+    assert response.status_code == 400
+    data = response.json
+
+    assert data['error'] == 'ValidationError'

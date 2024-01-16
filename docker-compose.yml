@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  flask-app:
+    build: .
+    ports:
+      - "7755:7755"
+    environment:
+      - FLASK_APP=core/server.py

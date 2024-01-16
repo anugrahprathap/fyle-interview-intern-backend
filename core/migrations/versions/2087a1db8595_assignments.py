@@ -45,7 +45,9 @@ def upgrade():
     sa.Column('teacher_id', sa.Integer(), nullable=True),
     sa.Column('content', sa.Text(), nullable=True),
     sa.Column('grade', sa.Enum('A', 'B', 'C', 'D', name='gradeenum'), nullable=True),
-    sa.Column('state', sa.Enum('DRAFT', 'SUBMITTED', name='assignmentstateenum'), nullable=True),
+    # sa.Column('state', sa.Enum('DRAFT', 'SUBMITTED', name='assignmentstateenum'), nullable=True),
+    sa.Column('state', sa.Enum('DRAFT', 'SUBMITTED',  name='assignmentstateenum'), nullable=True),
+
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), nullable=False),
     sa.ForeignKeyConstraint(['student_id'], ['students.id'], ),
@@ -70,13 +72,14 @@ def upgrade():
     assignment_4 = Assignment(student_id=student_2.id, content='THESIS T2')
 
     assignment_5 = Assignment(student_id=student_1.id, content='SOLUTION T1')
+    # assignment_6 = Assignment(student_id=student_1.id, content='SOLUTION T2')
 
     db.session.add(assignment_1)
     db.session.add(assignment_2)
     db.session.add(assignment_3)
     db.session.add(assignment_4)
     db.session.add(assignment_5)
-
+    # db.session.add(assignment_6)
     db.session.flush()
 
     Assignment.submit(
