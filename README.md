@@ -1,4 +1,4 @@
-## Challange Submission
+## Challenge Submission
 
 ### Project Overview
 
