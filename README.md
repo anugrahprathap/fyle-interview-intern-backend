@@ -26,6 +26,8 @@ This project is a Flask application that manages assignments for students, teach
 5. **Test Coverage:**
    - Ensured that all tests pass.
    - Achieved test coverage of 94% .
+
+
    ![Alt text](screenshots/test-coverage.png?raw=true "Optional Title")
 
 ### Docker Instructions
